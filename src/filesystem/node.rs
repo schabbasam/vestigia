@@ -14,6 +14,29 @@ pub enum Node {
 }
 
 impl Node {
+
+    // constructors for all three types
+    pub fn new_directory(name: &str, children: Vec<Node>) -> Self {
+        Node::Directory {
+            name: name.tro_string(),
+            children
+        }
+    }
+    
+    pub fn new_file(name: &str, content: &str) -> Self {
+        Node::Directory {
+            name: name.to_string(),
+            content: content.to_string()
+        }
+    }
+
+    pub fn new_message(name: &str) -> Self {
+        Node::Message {
+            name: name.to_string()
+        }
+    }
+    
+    // other useful functions
     pub fn get_name(&self) -> &str {
         // if a multiple patterns should do the same thing, you can use '|'
         match self {
@@ -30,6 +53,13 @@ impl Node {
     pub fn get_children(&self) -> Option<&[Node]> {
         match self {
             Node::Directory { children, .. } => Some(children),
+            _ => None
+        }
+    }
+
+    pub fn get_content(&self) -> Option<&str> {
+        match self {
+            Node::File { content, .. } => Some(content),
             _ => None
         }
     }
