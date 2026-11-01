@@ -116,13 +116,21 @@ pub fn run() {
             }
             Some(&"login") => {
                 if cmd.len() == 1 {
-                    login(&mut progress);
+                    login(&mut progress, &mut filesystem);
                 } else {
                     set_style(&Style::ERROR);
                     println!("too many arguments");
                 }
             }
-                
+            Some(&"unlock") => {
+                if cmd.len() == 2 {
+                    unlock(cmd[1], &mut progress, &mut filesystem);
+                } else {
+                    set_style(&Style::ERROR);
+                    println!("too many arguments");
+                }
+            }
+
             Some(_) => {
                 set_style(&Style::ERROR);
                 println!("command '{}' not found", input.trim());

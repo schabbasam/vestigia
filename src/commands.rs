@@ -2,6 +2,7 @@
 use crate::style::*;
 use std::io::{self, Write};
 use crate::game_progress::GameProgress;
+use crate::filesystem::navigation::FileSystem;
 
 pub struct Command {
     pub name: &'static str,
@@ -49,10 +50,15 @@ pub const COMMANDS: &[Command] = &[
         name: "login",
         description: "log into a user",
         usage: "login"
+    },
+    Command {
+        name: "unlock",
+        description: "unlocks crucial files with a code",
+        usage: "unlock [code]"
     }
 ];
 
-pub fn login(progress: &mut GameProgress) {
+pub fn login(progress: &mut GameProgress, filesystem: &mut FileSystem) {
     if progress.credentials_unlocked {
         set_style(&Style::ERROR);
         println!("already logged in");
@@ -75,11 +81,38 @@ pub fn login(progress: &mut GameProgress) {
     
     if username == "daniel.natsuki" && password == "11490964" {
         progress.credentials_unlocked = true;
+        filesystem.unlock_emails();
         set_style(&Style::NORMAL);
-        println!("access granted!");
+        println!("access to more emails in '/var/mail/daniel/' granted!");
     } else {
         set_style(&Style::ERROR);
         println!("access denied!");
+    }
+}
+
+pub fn unlock(code: &str, progress: &mut GameProgress, filesystem: &mut FileSystem) {
+    if !progress.credentials_unlocked {
+        set_style(&Style::ERROR);
+        println!("access denied: login required");
+        return;
+    }
+
+    if progress.research_unlocked {
+        set_style(&Style::ERROR);
+        println!("already unlocked");
+        return;
+    }
+
+    if code == "PHANTOM" {
+        filesystem.unlock_research();
+        filesystem.unlock_archive();
+        progress.research_unlocked = true;
+
+        set_style(&Style::NORMAL);
+        println!("'Documents/research/' and '/var/archive/' unlocked!");
+    } else {
+        set_style(&Style::ERROR);
+        println!("invalid code");
     }
 }
 
