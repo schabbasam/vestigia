@@ -6,6 +6,7 @@ use crate::style::*;
 use crate::commands::*;
 use crate::filesystem::node::Node;
 use crate::game_progress::GameProgress;
+use crate::typewriter::typewriter;
 
 static PROMPT: &str = ">> ";
 
@@ -102,7 +103,7 @@ pub fn run() {
                     match filesystem.cat(cmd[1]) {
                         Ok(content) => {
                             set_style(&Style::NORMAL);
-                            println!("{}", content);
+                            typewriter(content, 80, [5, 0, 0], false);
 
                             if filesystem.is_facility_map(cmd[1]) {
                                 // exit the cli if facility_map is found

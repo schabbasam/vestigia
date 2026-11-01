@@ -6,19 +6,22 @@ use std::{
     time::Duration
 };
 
-
-// delay in milliseconds
-const NORMAL_DELAY: u64     = 50;
-const COMMA_DELAY: u64      = 250;
-const SENTENCE_DELAY: u64   = 500;
-
-pub fn typewriter(text: &String, line_width: usize) {
+// delays defined as an array of 3 u64 numbers
+pub fn typewriter(
+    text: &str, 
+    line_width: usize, 
+    delays: [u64; 3],
+    normalize: bool) {
 
     // this is done to ignore all previous whitespaces and newlines
-    let normalized_text = text
+    let normalized_text = if normalize {
+        text
         .split_whitespace() // split at whitespaces
         .collect::<Vec<_>>() // create a dynamic Vec with all words
-        .join(" "); // join it to a string
+        .join(" ") // join it to a string
+    } else {
+        text.to_string()
+    };
     
     // which character in a line we are on
     let mut column = 0;
@@ -55,9 +58,9 @@ pub fn typewriter(text: &String, line_width: usize) {
             column += 1;
 
             let delay = match character {
-                '.' | '!' | '?' => SENTENCE_DELAY,
-                ',' | ';' | ':' => COMMA_DELAY,
-                _ => NORMAL_DELAY
+                '.' | '!' | '?' => delays[2],
+                ',' | ';' | ':' => delays[1],
+                _ => delays[0]
             };
 
             thread::sleep(Duration::from_millis(delay));

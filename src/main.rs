@@ -11,7 +11,8 @@ mod typewriter;
 mod filesystem;
 mod game_progress;
 
+
 fn main() {
-//    typewriter::typewriter(&texts::INTRO.green().italic(), 100);
+    typewriter::typewriter(texts::INTRO, 80, [50, 250, 500], true);
     cli::run();
 }

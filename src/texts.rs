@@ -633,7 +633,7 @@ FACILITY ARCHITECTURAL LAYOUT
 |  |                  |                |
 |  |     LAB 01       |                |
 |  |                  |                |
-|  |  MAIN TERMINAL   |                |
+|  |  Daniel          |                |
 |  |                  |                |
 |  +--------+---------+                |
 |           |                          |
@@ -643,21 +643,16 @@ FACILITY ARCHITECTURAL LAYOUT
 |  |                  |                |
 |  |     LAB 02       |                |
 |  |                  |                |
-|  |  CONFERENCE /    |                |
-|  |  WORKSPACE       |                |
+|  |  Alicia          |                |
+|  |                  |                |
 |  |                  |                |
 |  +------------------+                |
-|                                      |
+|           |                          |
 +--------------------------------------+
 
-NOTE:
+"#;
 
-Both laboratories are connected through
-an internal passage.
-
-The main entrance is located outside
-the displayed section.
-
-END OF DOCUMENT.
+pub const OUTRO: &str = r#"
+asdf
 "#;
 
