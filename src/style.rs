@@ -64,6 +64,11 @@ impl Style {
         weight: Weight::Dim,
         decoration: Decoration::Normal
     };
+    pub const CREDENTIALS: Self = Self {
+        color: Color::White,
+        weight: Weight::Bold,
+        decoration: Decoration::Italic
+    };
 }
 
 pub fn set_style(style: &Style) {

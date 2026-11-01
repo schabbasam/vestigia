@@ -9,6 +9,7 @@ mod texts;
 mod style;
 mod typewriter;
 mod filesystem;
+mod game_progress;
 
 fn main() {
 //    typewriter::typewriter(&texts::INTRO.green().italic(), 100);

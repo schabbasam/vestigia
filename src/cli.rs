@@ -5,12 +5,13 @@ use crate::filesystem::navigation::FileSystem;
 use crate::style::*;
 use crate::commands::*;
 use crate::filesystem::node::Node;
+use crate::game_progress::GameProgress;
 
 static PROMPT: &str = ">> ";
 
 pub fn run() {
-
-    let mut filesystem = FileSystem::new();
+    let mut progress    = GameProgress::new();
+    let mut filesystem  = FileSystem::new();
     
     loop {
         set_style(&Style::PROMPT);
@@ -113,7 +114,15 @@ pub fn run() {
                     println!("error: expected 1 argument, got {}", cmd.len()-1);
                 }
             }
-
+            Some(&"login") => {
+                if cmd.len() == 1 {
+                    login(&mut progress);
+                } else {
+                    set_style(&Style::ERROR);
+                    println!("too many arguments");
+                }
+            }
+                
             Some(_) => {
                 set_style(&Style::ERROR);
                 println!("command '{}' not found", input.trim());

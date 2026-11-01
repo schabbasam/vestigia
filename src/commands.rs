@@ -1,5 +1,7 @@
 
 use crate::style::*;
+use std::io::{self, Write};
+use crate::game_progress::GameProgress;
 
 pub struct Command {
     pub name: &'static str,
@@ -25,8 +27,8 @@ pub const COMMANDS: &[Command] = &[
     },
     Command {
         name: "cd",
-        description: "change directory",
-        usage: "cd [target-path]"
+        description: "change directory, argument is optional",
+        usage: "cd [directory]"
     },
     Command {
         name: "pwd",
@@ -36,9 +38,44 @@ pub const COMMANDS: &[Command] = &[
     Command {
         name: "ls",
         description: "list all files and folders in current working directory",
-        usage: "ls -f"
+        usage: "ls"
+    },
+    Command {
+        name: "cat",
+        description: "output the content of a file",
+        usage: "cat [file]"
+    },
+    Command {
+        name: "login",
+        description: "log into a user",
+        usage: "login"
     }
 ];
+
+pub fn login(progress: &mut GameProgress) {
+    set_style(&Style::CREDENTIALS);
+    
+    print!("{:<10}", "username:");
+    io::stdout().flush().unwrap();
+    let mut username = String::new();
+    io::stdin().read_line(&mut username).unwrap();
+    let username = username.trim();
+
+    print!("{:<10}", "password:");
+    io::stdout().flush().unwrap();
+    let mut password = String::new();
+    io::stdin().read_line(&mut password).unwrap();
+    let password = password.trim();
+    
+    if username == "daniel.natsuki" && password == "11490964" {
+        progress.credentials_unlocked = true;
+        set_style(&Style::NORMAL);
+        println!("access granted!");
+    } else {
+        set_style(&Style::ERROR);
+        println!("access denied!");
+    }
+}
 
 pub fn help(cmd: Vec<&str>) {
 
