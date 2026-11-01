@@ -69,10 +69,41 @@ impl FileSystem {
     }
 
     pub fn pwd(&self) -> String {
-        if self.current_path.is_empt() {
+        if self.current_path.is_empty() {
             return "/".to_string();
         }
 
         format!("/{}", self.current_path.join("/"))
     }
+    
+    // this function returns a 'Result'
+    // if it is a success, return () (empty value)
+    // if it isnt a success, return a String (with error message)
+    pub fn cd(&mut self, path: &str) -> Result<(), String> {
+        let mut new_path = if path.starts_with('/') {
+            Vec::new()
+        } else {
+            // without .clone(), the ownership would be transferred to new_path
+            // but we don't want to edit current_path
+            self.current_path.clone()
+        };
+
+        for part in path.split('/') {
+            match part {
+                "" | "."    => continue,
+                ".."        => {new_path.pop();}
+                name        => {new_path.push(name.to_string());}
+            }
+        }
+
+        match self.get_node(&new_path) {
+            Some(node) if node.is_directory() => {
+                self.current_path = new_path;
+                Ok(()) // was ist das?
+            }
+            Some(_) => Err(format!("'{}' is not a directory", path)),
+            None    => Err(format!("directory '{}' not found", path))
+        }
+    }
+
 }

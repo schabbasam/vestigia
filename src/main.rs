@@ -8,7 +8,7 @@ mod cli;
 mod texts;
 mod style;
 mod typewriter;
-
+mod filesystem;
 
 fn main() {
 //    typewriter::typewriter(&texts::INTRO.green().italic(), 100);

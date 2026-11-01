@@ -34,6 +34,19 @@ pub fn run() {
                 set_style(&Style::NORMAL);
                 println!("{}", filesystem.pwd());
             }
+            Some(&"cd") => {
+                match cmd.get(1) {
+                    Some(path) => {
+                        if let Err(error) = filesystem.cd(path) {
+                            set_style(&Style::ERROR);
+                            println!("{}", error);
+                        }
+                    }
+                    None => {
+                        println!("jubel");
+                    }
+                }
+            }
             Some(_) => {
                 set_style(&Style::ERROR);
                 println!("idk what {} is supposed to mean", input.trim());
