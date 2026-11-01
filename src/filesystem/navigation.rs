@@ -91,6 +91,8 @@ impl FileSystem {
         for part in path.split('/') {
             match part {
                 "" | "."    => continue,
+                // the curly brackets are necessary
+                // since we don't want to return anything and all arms have to match
                 ".."        => {new_path.pop();}
                 name        => {new_path.push(name.to_string());}
             }
@@ -99,11 +101,17 @@ impl FileSystem {
         match self.get_node(&new_path) {
             Some(node) if node.is_directory() => {
                 self.current_path = new_path;
-                Ok(()) // was ist das?
+                Ok(()) // part of Result<>, signals success with ()
             }
+            // Err shows that these outcomes are not desired
             Some(_) => Err(format!("'{}' is not a directory", path)),
             None    => Err(format!("directory '{}' not found", path))
         }
+    }
+
+    pub fn ls(&self) -> Option<&[Node]> {
+        // ? stops the program if node is not found
+        self.get_node(&self.current_path)?.get_children()
     }
 
 }

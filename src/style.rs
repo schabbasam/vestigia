@@ -49,6 +49,21 @@ impl Style {
         weight: Weight::Normal,
         decoration: Decoration::Normal
     };
+    pub const DIRECTORY: Self = Self {
+        color: Color::Blue,
+        weight: Weight::Bold,
+        decoration: Decoration::Normal
+    };
+    pub const FILE: Self = Self {
+        color: Color::Yellow,
+        weight: Weight::Normal,
+        decoration: Decoration::Italic
+    };
+    pub const MESSAGE: Self = Self {
+        color: Color::Default,
+        weight: Weight::Dim,
+        decoration: Decoration::Normal
+    };
 }
 
 pub fn set_style(style: &Style) {

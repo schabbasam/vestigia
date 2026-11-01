@@ -4,6 +4,7 @@ use std::io::{self, Write};
 use crate::filesystem::navigation::FileSystem;
 use crate::style::*;
 use crate::commands::*;
+use crate::filesystem::node::Node;
 
 static PROMPT: &str = ">> ";
 
@@ -43,7 +44,34 @@ pub fn run() {
                         }
                     }
                     None => {
-                        println!("jubel");
+                        // unwrap unwraps the Result
+                        filesystem.cd("/home/daniel").unwrap();
+                    }
+                }
+            }
+            Some(&"ls") => {
+                match filesystem.ls() {
+                    Some(nodes) => {
+                        for node in nodes {
+                            match node {
+                                Node::Directory {name, ..} => {
+                                    set_style(&Style::DIRECTORY);
+                                    println!("{name}");
+                                }
+                                Node::File {name, ..} => {
+                                    set_style(&Style::FILE);
+                                    println!("{name}");
+                                }
+                                Node::Message {name} => {
+                                    set_style(&Style::MESSAGE);
+                                    println!("{name}");
+                                }
+                            }
+                        }
+                    }
+                    None => {
+                        set_style(&Style::ERROR);
+                        println!("coul not read directory");
                     }
                 }
             }
