@@ -1,9 +1,18 @@
 
 use super::node::Node;
+use crate::texts;
 
 pub struct FileSystem {
     pub root: Node,
     current_path: Vec<String>
+}
+
+fn file(name: &str, content: &str) -> Node {
+    Node::new_file(name, content)
+}
+
+fn dir(name: &str, children: Vec<Node>) -> Node {
+    Node::new_directory(name, children)
 }
 
 impl FileSystem {
@@ -13,44 +22,89 @@ impl FileSystem {
             current_path: vec![]
         }
     }
+
     fn build_root() -> Node {
-        let user = Node::new_directory("daniel", vec![
-            Node::new_directory("Documents", vec![]),
-            Node::new_directory("Desktop", vec![]),
+        let user = dir("daniel", vec![
+            dir("Desktop", vec![
+                file("welcome.txt", texts::WELCOME),
+            ]),
+            dir("Documents", vec![
+                file("personnel_record.txt", texts::PERSONNEL_RECORD),
+                file("personal_notes.txt", texts::PERSONAL_NOTES),
+                file("access_manual.txt", texts::ACCESS_MANUAL),
+
+                dir("research", vec![
+                    file("project_overview.txt", texts::PROJECT_OVERVIEW),
+                    file("experiment_log.log", texts::EXPERIMENT_LOG),
+                    file("prototype_notes.txt", texts::PROTOTYPE_NOTES),
+                    file("internal_report.txt", texts::INTERNAL_REPORT),
+                ]),
+
+                dir("maintenance", vec![
+                    file("maintenance_log.log", texts::MAINTENANCE_LOG),
+                    file("equipment_inventory.txt", texts::EQUIPMENT_INVENTORY),
+                ]),
+            ]),
         ]);
 
-        let home = Node::new_directory("home", vec![user]);
+        let home = dir("home", vec![user]);
 
-        Node::new_directory("/", vec![
-            Node::new_directory("bin", vec![
-                Node::new_message("*contains binaries, irrelevant*"),
+        let etc = dir("etc", vec![
+            file("system_info.txt", texts::SYSTEM_INFO),
+            file("terminal_manual.txt", texts::ACCESS_MANUAL),
+        ]);
+
+        let var = dir("var", vec![
+            dir("log", vec![
+                file("system.log", texts::SYSTEM_LOG),
+                file("access.log", texts::ACCESS_LOG),
             ]),
-            Node::new_directory("boot", vec![
-                Node::new_message("*bootloader stuff, irrelevant*"),
+
+            dir("mail", vec![
+                dir("daniel", vec![
+                    file("01_birthday.txt", texts::MAIL_BIRTHDAY),
+                    file("02_cabinet.txt", texts::MAIL_CABINET),
+                    file("03_orpheus.txt", texts::MAIL_ORPHEUS),
+                    file("04_demonstration.txt", texts::MAIL_DEMONSTRATION),
+                ]),
             ]),
-            Node::new_directory("dev", vec![
-                Node::new_message("*device files, irrelevant*"),
+
+            dir("archive", vec![
+                dir("[LOCKED]", vec![
+                    file("archive_index.txt", texts::ARCHIVE_INDEX),
+                    file("facility_map.dat", texts::FACILITY_MAP),
+                ]),
             ]),
-            Node::new_directory("etc", vec![]),
+        ]);
+
+        dir("/", vec![
+            dir("bin", vec![
+                Node::new_message("[contains binaries, irrelevant]"),
+            ]),
+            dir("boot", vec![
+                Node::new_message("[bootloader stuff, irrelevant]"),
+            ]),
+            dir("dev", vec![
+                Node::new_message("[device files, irrelevant]"),
+            ]),
+            etc,
             home,
-            Node::new_directory("lib", vec![
-                Node::new_message("*shared libraries, irrelevant*"),
+            dir("lib", vec![
+                Node::new_message("[shared libraries, irrelevant]"),
             ]),
-            Node::new_directory("mnt", vec![
-                Node::new_message("*mount point, irrelevant*"),
+            dir("mnt", vec![
+                Node::new_message("[mount point, irrelevant]"),
             ]),
-            Node::new_directory("tmp", vec![
-                Node::new_message("*temporary files, irrelevant*"),
+            dir("tmp", vec![
+                Node::new_message("[temporary files, irrelevant]"),
             ]),
-            Node::new_directory("usr", vec![
-                Node::new_message("*shared files, irrelevant*"),
+            dir("usr", vec![
+                Node::new_message("[shared files, irrelevant]"),
             ]),
-            Node::new_directory("sys", vec![
-                Node::new_message("*kernel interface, irrelevant*"),
+            dir("sys", vec![
+                Node::new_message("[kernel interface, irrelevant]"),
             ]),
-            Node::new_directory("var", vec![
-                Node::new_directory("log", vec![]),
-            ]),
+            var,
         ])
     }
     
