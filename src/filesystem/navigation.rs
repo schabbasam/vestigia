@@ -243,4 +243,12 @@ impl FileSystem {
             node.add_child(file("facility_map.dat", texts::FACILITY_MAP));
         }
     }
+
+    pub fn is_facility_map(&self, path: &str) -> bool {
+        self.resolve_path(path) == vec![
+            "var".to_string(),
+            "archive".to_string(),
+            "facility_map.dat".to_string()
+        ]
+    }
 }

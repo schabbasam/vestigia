@@ -103,6 +103,11 @@ pub fn run() {
                         Ok(content) => {
                             set_style(&Style::NORMAL);
                             println!("{}", content);
+
+                            if filesystem.is_facility_map(cmd[1]) {
+                                // exit the cli if facility_map is found
+                                break;
+                            }
                         }
                         Err(error) => {
                             set_style(&Style::ERROR);
