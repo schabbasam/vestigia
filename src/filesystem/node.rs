@@ -18,13 +18,13 @@ impl Node {
     // constructors for all three types
     pub fn new_directory(name: &str, children: Vec<Node>) -> Self {
         Node::Directory {
-            name: name.tro_string(),
+            name: name.to_string(),
             children
         }
     }
     
     pub fn new_file(name: &str, content: &str) -> Self {
-        Node::Directory {
+        Node::File{
             name: name.to_string(),
             content: content.to_string()
         }
@@ -40,8 +40,8 @@ impl Node {
     pub fn get_name(&self) -> &str {
         // if a multiple patterns should do the same thing, you can use '|'
         match self {
-            Node::File { name }
-            | Node::Directory { name }
+            Node::File { name, .. }
+            | Node::Directory { name, .. }
             | Node::Message { name } => name
         }
     }

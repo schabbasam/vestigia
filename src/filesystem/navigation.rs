@@ -1,4 +1,6 @@
 
+use super::node::Node;
+
 pub struct FileSystem {
     pub root: Node,
     pub current_path: Vec<String>
