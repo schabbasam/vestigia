@@ -653,6 +653,78 @@ FACILITY ARCHITECTURAL LAYOUT
 "#;
 
 pub const OUTRO: &str = r#"
-asdf
+Is there really another hall just next door?
+
+Well, according to the floor plan, there should be.
+
+Curiosity gets the better of you, and you decide to follow the marked connection.
+
+On your way there, something catches your attention.
+
+The contents of the shelves don't actually seem all that old. Some of the objects look surprisingly well-maintained. A few even appear to be brand new.
+
+Strange.
+
+You eventually reach the door.
+
+Unlike the massive entrance you came through earlier, this one is considerably lighter. Opening it takes almost no effort.
+
+And what awaits you on the other side is certainly not what you expected.
+
+A bright, remarkably modern laboratory stretches out before you. Clean surfaces, sophisticated equipment, enormous displays and all sorts of high-tech machinery.
+
+Four people are sitting on chairs nearby, apparently rather busy discussing something.
+
+You stand there for a moment, trying to make sense of what you're seeing.
+
+Eventually, you decide to interrupt them.
+
+You express your surprise and ask what this place is supposed to be.
+
+Four friendly faces turn towards you.
+
+They seem more amused than startled by your sudden appearance.
+
+One of them begins explaining that this is the so-called "Jubel-Lab", a place where the four of them live while conducting various scientific research projects.
+
+A rather young-looking guy takes the lead in the conversation and introduces himself.
+
+His name is Daniel Natsuki.
+
+You explain how you ended up here, starting with your little walk through the strawberry fields and ending with the discovery of the underground facility.
+
+You also mention that you initially assumed the entire place was some sort of abandoned site.
+
+The four of them exchange amused glances and chuckle.
+
+One of the women finally points out that Daniel simply has a particular fondness for antique and retro-style aesthetics.
+
+Well, that explains a few things.
+
+After a little more conversation, you all decide to head back to the room you came from.
+
+As you approach the desk, Daniel casually makes a few hand gestures.
+
+A short chime rings through the room.
+
+And suddenly, everything lights up.
+
+The seemingly ancient computer monitor turns out to be a cutting-edge display. The walls come alive with countless screens, diagrams, graphs and other information you can barely begin to comprehend.
+
+Even the shelves illuminate themselves. Digital name tags appear beside the objects, revealing their identities and presumably a lot more information.
+
+The entire room transforms before your eyes.
+
+Somehow, the combination of futuristic technology and retro aesthetics actually works surprisingly well.
+
+You take a moment to appreciate the rather unusual sight.
+
+After all, you didn't exactly expect to find a fully operational research facility beneath a seemingly abandoned shed.
+
+You decide to stay a little longer.
+
+There is still quite a lot to learn about this place, its inhabitants, and whatever it is they're working on.
+
+And, more importantly, you've just met four rather interesting people.
 "#;
 
