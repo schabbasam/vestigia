@@ -80,23 +80,7 @@ impl FileSystem {
     // if it is a success, return () (empty value)
     // if it isnt a success, return a String (with error message)
     pub fn cd(&mut self, path: &str) -> Result<(), String> {
-        let mut new_path = if path.starts_with('/') {
-            Vec::new()
-        } else {
-            // without .clone(), the ownership would be transferred to new_path
-            // but we don't want to edit current_path
-            self.current_path.clone()
-        };
-
-        for part in path.split('/') {
-            match part {
-                "" | "."    => continue,
-                // the curly brackets are necessary
-                // since we don't want to return anything and all arms have to match
-                ".."        => {new_path.pop();}
-                name        => {new_path.push(name.to_string());}
-            }
-        }
+        let new_path = self.resolve_path(path);
 
         match self.get_node(&new_path) {
             Some(node) if node.is_directory() => {
@@ -112,6 +96,45 @@ impl FileSystem {
     pub fn ls(&self) -> Option<&[Node]> {
         // ? stops the program if node is not found
         self.get_node(&self.current_path)?.get_children()
+    }
+    
+    fn resolve_path(&self, path: &str) -> Vec<String> {
+        let mut new_path = if path.starts_with('/') {
+            Vec::new()
+        } else {
+            // without .clone(), the ownership would be transferred to new_path
+            // but we don't want to edit current_path
+            self.current_path.clone()
+        };
+
+        for part in path.split('/') {
+            match part {
+                "" | "."    => continue,
+                // the curly brackets are necessary
+                // since we don't want to return anything and all arms have to match
+                ".."        => { new_path.pop(); }
+                name        => { new_path.push(name.to_string()); }
+            }
+        }
+
+        new_path
+    }
+ 
+    pub fn cat(&self, path: &str) -> Result<&str, String> {
+        let resolved_path = self.resolve_path(path);
+
+        match self.get_node(&resolved_path) {
+            Some(node) => match node.get_content() {
+                Some(content) => Ok(content),
+                None if node.is_directory() => {
+                    Err(format!("'{}' is a directory", path))
+                }
+                None => {
+                    Err(format!("'{}' is not a readable file", path))
+                }
+            },
+            None => Err(format!("file '{}' not found", path))
+        }
     }
 
 }

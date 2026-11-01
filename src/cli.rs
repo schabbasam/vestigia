@@ -96,6 +96,24 @@ pub fn run() {
                     println!("too many arguments");
                 }
             }
+            Some(&"cat") => {
+                if cmd.len() == 2 {
+                    match filesystem.cat(cmd[1]) {
+                        Ok(content) => {
+                            set_style(&Style::NORMAL);
+                            println!("{}", content);
+                        }
+                        Err(error) => {
+                            set_style(&Style::ERROR);
+                            println!("{}", error);
+                        }
+                    }
+                } else {
+                    set_style(&Style::ERROR);
+                    println!("error: expected 1 argument, got {}", cmd.len()-1);
+                }
+            }
+
             Some(_) => {
                 set_style(&Style::ERROR);
                 println!("command '{}' not found", input.trim());
