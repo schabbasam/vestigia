@@ -1,12 +1,15 @@
 
 use std::io::{self, Write};
 
+use crate::filesystem::navigation::FileSystem;
 use crate::style::*;
 use crate::commands::*;
 
 static PROMPT: &str = ">> ";
 
 pub fn run() {
+
+    let mut filesystem = FileSystem::new();
     
     loop {
         set_style(&Style::PROMPT);
@@ -26,6 +29,10 @@ pub fn run() {
             }
             Some(&"help") => {
                 help(cmd);
+            }
+            Some(&"pwd") => {
+                set_style(&Style::NORMAL);
+                println!("{}", filesystem.pwd());
             }
             Some(_) => {
                 set_style(&Style::ERROR);

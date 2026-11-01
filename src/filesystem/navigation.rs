@@ -3,7 +3,7 @@ use super::node::Node;
 
 pub struct FileSystem {
     pub root: Node,
-    pub current_path: Vec<String>
+    current_path: Vec<String>
 }
 
 impl FileSystem {
@@ -52,5 +52,27 @@ impl FileSystem {
                 Node::new_directory("log", vec![]),
             ]),
         ])
+    }
+    
+    // path is a slice of a String, meaning arrays and Vecs, both are fine
+    fn get_node(&self, path: &[String]) -> Option<&Node> {
+        let mut current = &self.root;
+
+        for part in path {
+            // find_child returns an Option, thats why we can use ? instead of having to write a
+            // whole match block. if Some(node) it is node, else None
+            // only works because this function returns Option too
+            current = current.find_child(part)?;
+        }
+
+        Some(current)
+    }
+
+    pub fn pwd(&self) -> String {
+        if self.current_path.is_empt() {
+            return "/".to_string();
+        }
+
+        format!("/{}", self.current_path.join("/"))
     }
 }
