@@ -49,7 +49,7 @@ pub fn run() {
                 }
             }
             Some(&"cd") => {
-                if cmd.len() == 2 {
+                if cmd.len() <= 2 {
                     match cmd.get(1) {
                         Some(path) => {
                             if let Err(error) = filesystem.cd(path) {
@@ -106,7 +106,13 @@ pub fn run() {
                             typewriter(content, 80, [5, 0, 0], false);
 
                             if filesystem.is_facility_map(cmd[1]) {
-                                // exit the cli if facility_map is found
+                                set_style(&Style::HEADING);
+                                println!("\nPress ENTER to continue...");
+
+                                let mut input = String::new();
+                                io::stdin().read_line(&mut input).unwrap();
+
+                                println!("\n");
                                 break;
                             }
                         }
