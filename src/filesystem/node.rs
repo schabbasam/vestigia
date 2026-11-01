@@ -75,4 +75,13 @@ impl Node {
             children.push(child);
         }
     }
+
+    pub fn get_child_mut(&mut self, name: &str) -> Option<&mut Node> {
+        match self {
+            Node::Directory { children, .. } => {
+                children.iter_mut().find(|child| child.get_name() == name)
+            }
+            _ => None
+        }
+    }
 }

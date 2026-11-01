@@ -192,4 +192,55 @@ impl FileSystem {
         }
     }
 
+    pub fn unlock_emails(&mut self) {
+        let path = vec![
+            "var".to_string(),
+            "mail".to_string(),
+            "daniel".to_string()
+        ];
+
+        if let Some(node) = self.get_node_mut(&path) {
+            node.add_child(file("02_cabinet.txt", texts::MAIL_CABINET));
+            node.add_child(file("03_orpheus.txt", texts::MAIL_ORPHEUS));
+            node.add_child(file("04_demonstration.txt", texts::MAIL_DEMONSTRATION));
+        }
+    }
+
+    fn get_node_mut(&mut self, path: &[String]) -> Option<&mut Node> {
+        let mut current = &mut self.root;
+
+        for part in path {
+            current = current.get_child_mut(part)?;
+        }
+
+        Some(current)
+    }
+
+    pub fn unlock_research(&mut self) {
+        let path = vec![
+            "home".to_string(),
+            "daniel".to_string(),
+            "Documents".to_string()
+        ];
+
+        if let Some(node) = self.get_node_mut(&path) {
+            node.add_child(dir("research", vec![
+                file("project_overview.txt", texts::PROJECT_OVERVIEW),
+                file("experiment_log.log", texts::EXPERIMENT_LOG),
+                file("prototype_notes.txt", texts::PROTOTYPE_NOTES),
+                file("internal_report.txt", texts::INTERNAL_REPORT),
+            ]));
+        }
+    }
+    pub fn unlock_archive(&mut self) {
+        let path = vec![
+            "var".to_string(),
+            "archive".to_string()
+        ];
+
+        if let Some(node) = self.get_node_mut(&path) {
+            node.add_child(file("archive_index.txt", texts::ARCHIVE_INDEX));
+            node.add_child(file("facility_map.dat", texts::FACILITY_MAP));
+        }
+    }
 }
