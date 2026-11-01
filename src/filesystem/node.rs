@@ -69,4 +69,10 @@ impl Node {
             iter().
             find(|child| child.get_name() == name)
     }
+
+    pub fn add_child(&mut self, child: Node) {
+        if let Node::Directory {children, ..} = self {
+            children.push(child);
+        }
+    }
 }

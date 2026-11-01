@@ -32,14 +32,14 @@ impl FileSystem {
                 file("personnel_record.txt", texts::PERSONNEL_RECORD),
                 file("personal_notes.txt", texts::PERSONAL_NOTES),
                 file("access_manual.txt", texts::ACCESS_MANUAL),
-
+/*
                 dir("research", vec![
                     file("project_overview.txt", texts::PROJECT_OVERVIEW),
                     file("experiment_log.log", texts::EXPERIMENT_LOG),
                     file("prototype_notes.txt", texts::PROTOTYPE_NOTES),
                     file("internal_report.txt", texts::INTERNAL_REPORT),
                 ]),
-
+*/
                 dir("maintenance", vec![
                     file("maintenance_log.log", texts::MAINTENANCE_LOG),
                     file("equipment_inventory.txt", texts::EQUIPMENT_INVENTORY),
@@ -63,18 +63,19 @@ impl FileSystem {
             dir("mail", vec![
                 dir("daniel", vec![
                     file("01_birthday.txt", texts::MAIL_BIRTHDAY),
+/*
                     file("02_cabinet.txt", texts::MAIL_CABINET),
                     file("03_orpheus.txt", texts::MAIL_ORPHEUS),
                     file("04_demonstration.txt", texts::MAIL_DEMONSTRATION),
+*/
                 ]),
             ]),
-
+/*
             dir("archive", vec![
-                dir("[LOCKED]", vec![
-                    file("archive_index.txt", texts::ARCHIVE_INDEX),
-                    file("facility_map.dat", texts::FACILITY_MAP),
-                ]),
+                file("archive_index.txt", texts::ARCHIVE_INDEX),
+                file("facility_map.dat", texts::FACILITY_MAP),
             ]),
+*/
         ]);
 
         dir("/", vec![
