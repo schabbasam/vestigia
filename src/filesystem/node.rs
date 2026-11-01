@@ -63,4 +63,10 @@ impl Node {
             _ => None
         }
     }
+
+    pub fn find_child(&self, name: &str) -> Option<&Node> {
+        self.get_children()?.
+            iter().
+            find(|child| child.get_name() == name)
+    }
 }
