@@ -333,6 +333,8 @@ One thing remains:
 We need enough space for all four of us
 during the next presentation.
 
+By the way, the code is PHANTOM.
+
 - Daniel
 "#;
 
@@ -424,10 +426,10 @@ Last inventory: 2026-10-28
 // EMAILS
 
 pub const MAIL_BIRTHDAY: &str = r#"
-From: alicia@lab.local
-To: daniel@lab.local
-Date: 2026-06-14
-Subject: Happy Birthday
+From:       alicia@jubel.lab
+To:         daniel@jubel.lab
+Date:       2026-06-14
+Subject:    Happy Birthday
 
 Happy birthday, Daniel! Did you really think
 I would let this day pass quitly?
@@ -443,10 +445,10 @@ Have a great day!
 "#;
 
 pub const MAIL_CABINET: &str = r#"
-From: steve@lab.local
-To: daniel@lab.local
-Date: 2026-10-24
-Subject: The cabinet
+From:       steve@jubel.lab
+To:         daniel@jubel.lab
+Date:       2026-10-24
+Subject:    The cabinet
 
 Hey Daniel,
 
@@ -464,10 +466,10 @@ Just don't put any more coffee on top of it.
 "#;
 
 pub const MAIL_ORPHEUS: &str = r#"
-From: lawliet@lab.local
-To: daniel@lab.local
-Date: 2026-10-26
-Subject: ORPHEUS - Final results
+From:       lawliet@jubel.lab
+To:         daniel@jubel.lab
+Date:       2026-10-26
+Subject:    ORPHEUS - Final results
 
 Daniel,
 
@@ -492,10 +494,10 @@ what it can actually do.
 "#;
 
 pub const MAIL_DEMONSTRATION: &str = r#"
-From: daniel@lab.local
-To: alicia@lab.local
-Date: 2026-10-27
-Subject: Tomorrow's demonstration
+From:       daniel@jubel.lab
+To:         alicia@jubel.lab
+Date:       2026-10-27
+Subject:    Tomorrow's demonstration
 
 Hi Alicia,
 
@@ -575,24 +577,6 @@ Guest session initialized.
 2026-10-28 08:42:25
 Access to /archive/ denied.
 "#;
-
-
-// EMAIL APP INTRODUCTION
-
-pub const MAIL_HELP: &str = r#"
-JUBEL MAIL
-============
-
-Local mail service.
-
-Available commands:
-
-mail       - Open mailbox
-mail <id>  - Read a specific message
-
-Use 'mail' to list available messages.
-"#;
-
 
 // ARCHIVE
 

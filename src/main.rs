@@ -15,4 +15,5 @@ mod game_progress;
 fn main() {
     typewriter::typewriter(texts::INTRO, 80, [50, 250, 500], true);
     cli::run();
+    typewriter::typewriter(texts::OUTRO, 80, [50, 250, 500], true);
 }

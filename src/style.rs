@@ -13,7 +13,7 @@ pub enum Weight {
 
 #[derive(Clone, Copy, Debug)]
 pub enum Decoration {
-    Normal, Italic, Underline
+    Normal, Italic//, Underline
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -89,7 +89,7 @@ pub fn set_style(style: &Style) {
 
     let decoration_code = match style.decoration {
         Decoration::Normal      => 23,
-        Decoration::Underline   => 4,
+//        Decoration::Underline   => 4,
         Decoration::Italic      => 3
     };
     
@@ -105,6 +105,7 @@ pub fn clear_screen() {
     print!("\x1b[2J\x1b[H");
 }
 
+#[allow(dead_code)]
 pub fn test() {
     // should iterate through all combinations to check them out once
     const COLORS: [Color; 6] = [
@@ -120,10 +121,9 @@ pub fn test() {
         Weight::Bold,
         Weight::Dim
     ];
-    const DECS: [Decoration; 3] = [
+    const DECS: [Decoration; 2] = [
         Decoration::Normal,
         Decoration::Italic,
-        Decoration::Underline
     ];
 
     for c in &COLORS {

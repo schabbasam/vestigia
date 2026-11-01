@@ -70,12 +70,14 @@ impl FileSystem {
 */
                 ]),
             ]),
-/*
+
             dir("archive", vec![
+/*
                 file("archive_index.txt", texts::ARCHIVE_INDEX),
                 file("facility_map.dat", texts::FACILITY_MAP),
-            ]),
 */
+            ]),
+
         ]);
 
         dir("/", vec![
