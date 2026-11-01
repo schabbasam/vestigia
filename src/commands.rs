@@ -53,6 +53,12 @@ pub const COMMANDS: &[Command] = &[
 ];
 
 pub fn login(progress: &mut GameProgress) {
+    if progress.credentials_unlocked {
+        set_style(&Style::ERROR);
+        println!("already logged in");
+        return;
+    }
+
     set_style(&Style::CREDENTIALS);
     
     print!("{:<10}", "username:");
